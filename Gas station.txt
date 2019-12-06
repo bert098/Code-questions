@@ -1,0 +1,93 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+class Computer {
+    
+
+  
+  
+  Computer() {}
+
+    void findRoute(int [] A, int [] B)
+
+    {
+    boolean test = false;
+    int index = -1;
+        for (int i = 0; i < A.length; i++)
+        
+        {
+            if(A[i] > B[i])
+            {
+                  test = testRoute(A,B,i);
+                if(test == true)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            
+        }
+        System.out.println(test);
+         System.out.println(index);
+    
+    }
+    
+    Boolean testRoute(int [] A, int [] B, int index)
+    {
+        
+        int original = index;
+        int distance; 
+        int gas;
+        
+        distance = B[index];
+        gas = A[index];
+        
+        for(int i = 0; i < A.length; i++)
+        {
+            
+            gas = gas - distance;
+            if(index < A.length - 1)
+            {
+                index++;
+            }
+            else 
+            {
+                index = 0;
+            }
+            
+            
+            if(gas < 0)
+            {
+                break;
+                
+            }
+            if(index == original)
+            {
+                
+                return true;
+            }
+            
+            gas= gas + A[index];
+            
+            distance = B[index];
+        }
+        return false;
+        
+        
+    }
+
+}
+
+public class MainClass
+{
+    public static void main (String[] args)
+    {
+        Computer my = new Computer();
+        int[] A = new int[]{ 1,2,3}; 
+        int[] B = new int[]{ 2,3,1}; 
+        
+        my.findRoute(A,B);
+
+    }
+}
